@@ -5,7 +5,7 @@
 
 💡 受 [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) 项目启发，采建立了全流程可使用 LLM 模型实现的本地知识库问答应用。目前支持了chatGLM 、Qwen 等开源大模型。
 
-✅ 本项目中 Embedding 默认选用的是 [GanymedeNil/text2vec-base-chinese](https://huggingface.co/GanymedeNil/text2vec-base-chinese/tree/main) ，LLM 默认选用的是 [ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B) 。依托上述模型，本项目可实现使用**开源**模型**离线私有部署**。
+🚩 本项目中 Embedding 默认选用的是 [GanymedeNil/text2vec-base-chinese](https://huggingface.co/GanymedeNil/text2vec-base-chinese/tree/main) ，LLM 默认选用的是 [ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B) 。依托上述模型，本项目可实现使用**开源**模型**离线私有部署**。
 
 🖥️ 本项目主要有以下过程:
 - **读取文本** 
@@ -33,6 +33,7 @@
 - ChatGLM-6B 模型硬件需求
 
   注：如未将模型下载至本地，请执行前检查`$HOME/.cache/huggingface/`文件夹剩余空间，模型文件下载至本地需要 15 GB 存储空间。
+
 
   | **量化等级**   | **最低 GPU 显存**（推理） | **最低 GPU 显存**（高效参数微调） |
       | -------------- | ------------------------- | --------------------------------- |
