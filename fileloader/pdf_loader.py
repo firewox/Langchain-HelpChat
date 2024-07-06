@@ -2,6 +2,9 @@ from langchain.document_loaders.unstructured import UnstructuredFileLoader
 from typing import List
 import os
 from paddleocr import PaddleOCR
+import nltk
+import fitz
+from configs.model_config import NLTK_DATA_PATH
 
 nltk.data.path = [NLTK_DATA_PATH] + nltk.data.path
 
@@ -37,5 +40,13 @@ class UnstructuredPaddlePDFLoader(UnstructuredFileLoader):
             return txt_file_path
 
         txt_file_path = pdf_ocr_txt(self.file_path)
-        from unstructured.partition.text import partition_text
-        return partition_text(filename=txt_file_path, **self.unstructured_kwargs)
+        # 导包unstructured.partition.text错误，使用nltk替代
+        nltk.download('punkt')
+        from nltk.tokenize import sent_tokenize, word_tokenize
+        with open(txt_file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
+        sentences = sent_tokenize(text)
+        return [word_tokenize(sentence) for sentence in sentences]
+        # 导包unstructured.partition.text错误，使用nltk替代
+        #from unstructured.partition.text import partition_text
+        #return partition_text(filename=txt_file_path, **self.unstructured_kwargs)

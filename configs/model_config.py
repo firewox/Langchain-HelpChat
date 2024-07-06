@@ -18,7 +18,7 @@ embedding_model_dict = {
     "text2vec": "GanymedeNil/text2vec-large-chinese",
 }
 # Embedding model name
-EMBEDDING_MODEL = "text2vec"
+EMBEDDING_MODEL = "text2vec-base"
 
 # Embedding running device
 EMBEDDING_DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
@@ -70,6 +70,7 @@ USE_PTUNING_V2 = False
 LLM_DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 
 # vector_store路径
+# __file__ = "d:\\lyt\\"
 VS_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vector_store")
 
 #知识库原始文件内容路径
@@ -120,3 +121,6 @@ OPEN_CROSS_DOMAIN = False
 # 具体申请方式请见 https://learn.microsoft.com/en-us/bing/search-apis/bing-web-search/quickstarts/rest/python
 BING_SEARCH_URL = "https://api.bing.microsoft.com/v7.0/search"
 BING_SUBSCRIPTION_KEY = ""
+
+# Show reply with source text from input document
+REPLY_WITH_SOURCE = True
