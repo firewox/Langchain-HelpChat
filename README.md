@@ -3,9 +3,9 @@
 
 🤖️ 利用 [langchain](https://github.com/hwchase17/langchain) 思想实现，基于本地知识库建立一套对中文场景与开源模型支持友好、可离线运行的知识库问答解决方案。
 
-💡 受 [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) 项目启发，采建立了全流程可使用 LLM 模型实现的本地知识库问答应用。目前支持了chatGLM 、Qwen 等开源大模型。
+💡 受 [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) 项目启发，采建立了全流程可使用 LLM 模型实现的本地知识库问答应用。目前支持了chatGLM-6b、chatGLM-4-Flash-api 等开源大模型。
 
-🚩 本项目中 Embedding 默认选用的是 [GanymedeNil/text2vec-base-chinese](https://huggingface.co/GanymedeNil/text2vec-base-chinese/tree/main) ，LLM 默认选用的是 [ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B) 。依托上述模型，本项目可实现使用**开源**模型**离线私有部署**。
+🚩 本项目中 Embedding 默认选用的是 [GanymedeNil/text2vec-base-chinese](https://huggingface.co/GanymedeNil/text2vec-base-chinese/tree/main) ，LLM 默认选用的是 [ChatGLM-4-Flash](https://open.bigmodel.cn/console/trialcenter?modelCode=glm-4-flash) 。依托上述模型，本项目可实现使用**开源**模型**离线私有部署**。
 
 🖥️ 本项目主要有以下过程:
 - **读取文本** 
@@ -45,29 +45,36 @@
 
 ## 开发部署
 ### 1. 使用命令行交互
-执行 [cli_demo.py](cli_demo.py) 脚本体验**命令行交互**：
+执行 [main.py](main.py) 脚本体验**命令行交互**：
 ```shell
-$ python help_chat.py
+$ python main.py
 ```
 
 
 ## 路线图
 
-- [ ] Langchain 应用
+- [x] Langchain 应用
     - [x] 接入非结构化文档（已支持 md、pdf、docx、txt 文件格式）
     - [x] jpg 与 png 格式图片的 OCR 文字识别
-    - [x] 搜索引擎接入
+    - [ ] 搜索引擎接入
     - [ ] 本地网页接入
     - [ ] 结构化数据接入（如 csv、Excel、SQL 等）
     - [ ] 知识图谱/图数据库接入
     - [ ] Agent 实现
 - [x] 增加更多 LLM 模型支持
     - [x] [THUDM/chatglm-6b](https://huggingface.co/THUDM/chatglm-6b)
-    - [x] [THUDM/chatglm-6b-int4](https://huggingface.co/THUDM/chatglm-6b-int4)
-    - [x] [THUDM/chatglm-6b-int4-qe](https://huggingface.co/THUDM/chatglm-6b-int4-qe)
+    - [x] [THUDM/chatglm-4-Flash](https://open.bigmodel.cn/console/trialcenter?modelCode=glm-4-flash)
+    - [ ] [THUDM/chatglm-6b-int4](https://huggingface.co/THUDM/chatglm-6b-int4)
+    - [ ] [THUDM/chatglm-6b-int4-qe](https://huggingface.co/THUDM/chatglm-6b-int4-qe)
+    - [ ] [Qwen/Qwen2.5-72B-Instruct](https://www.modelscope.cn/models/Qwen/Qwen2.5-72B-Instruct)
+    - [ ] [Qwen/Qwen2.5-0.5B-Instruct](https://www.modelscope.cn/models/Qwen/Qwen2.5-0.5B-Instruct)
 - [ ] 增加更多 Embedding 模型支持
-    - [x] [shibing624/text2vec-base-chinese](https://huggingface.co/shibing624/text2vec-base-chinese)
+    - [ ] [shibing624/text2vec-base-chinese](https://huggingface.co/shibing624/text2vec-base-chinese)
+    - [x] [GanymedeNil/text2vec-base-chinese](https://huggingface.co/GanymedeNil/text2vec-base-chinese)
     - [x] [GanymedeNil/text2vec-large-chinese](https://huggingface.co/GanymedeNil/text2vec-large-chinese)
+- [x] 终端对话
+    - [x] 非流式对话
+    - [ ] 流式对话
 - [ ] Web UI
     - [ ] 基于 gradio 实现 Web UI DEMO
     - [ ] 基于 streamlit 实现 Web UI DEMO
