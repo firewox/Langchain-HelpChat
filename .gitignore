@@ -2,3 +2,4 @@
 logs/*
 content/*
 vector_store/*
+.idea/*
