@@ -9,8 +9,8 @@ def main():
     args = parser.parse_args([])
     args_dict = vars(args)
     loader.loaderCheckPoint = loader.LoaderCheckPoint(args_dict)
-    # 初始化LLM模型
-    llm_model_ins = loader.loaderCheckPoint.loaderLLM(llm_model="glm-4-flash",no_remote_model=False)
+    # 初始化LLM模型：qwen-turbo、glm-4-flash、qwen2-0.5b-instruct、qwen-plus
+    llm_model_ins = loader.loaderCheckPoint.loaderLLM(llm_model="qwen-plus",no_remote_model=False)
     llm_model_ins.history_len = local_file_model_config.LLM_HISTORY_LEN
 
     # 初始化向量模型

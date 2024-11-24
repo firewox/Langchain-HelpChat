@@ -131,9 +131,10 @@ class LoaderCheckPoint:
             self.no_remote_model = no_remote_model
             self.model_name=llm_model
             self.llm_model_info = local_file_model_config.llm_model_dict[llm_model]
-            logger.info(f"#### 使用在线大模型API接口")
+            logger.info(f"#### 使用在线大模型API接口, 使用的大模型bot={llm_model}")
+            print(f"使用在线大模型API接口, 使用的大模型bot={llm_model}")
             #初始化模型
-            logger.info(f"sys.modules['models']={sys.modules['models']}")
+            #logger.info(f"sys.modules['models']={sys.modules['models']}")
             provides_class = getattr(sys.modules['models'], self.llm_model_info['provides'])
             modelInsLLM = provides_class(checkPoint=self)
             return modelInsLLM

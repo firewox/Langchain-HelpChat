@@ -41,6 +41,38 @@ llm_model_dict = {
         "api_key":os.getenv("GLM_4_FLASH_API_KEY",""),
         "provides": "ChatGLM_Flash"
     },
+    "qwen-turbo": {
+        "name": "qwen-turbo",
+        "pretrained_model_name": os.getenv("QWEN_API_KEY",""),
+        "local_model_path": os.getenv("QWEN_API_KEY",""),
+        "api_key":os.getenv("QWEN_API_KEY",""),
+        "base_url":os.getenv("QWEN_BASE_URL",""),
+        "provides": "OpenAI_Qwen"
+    },
+    "qwen2-0.5b-instruct": {
+        "name": "qwen2-0.5b-instruct",
+        "pretrained_model_name": os.getenv("QWEN_API_KEY",""),
+        "local_model_path": os.getenv("QWEN_API_KEY",""),
+        "api_key":os.getenv("QWEN_API_KEY",""),
+        "base_url":os.getenv("QWEN_BASE_URL",""),
+        "provides": "OpenAI_Qwen"
+    },
+    "qwen-plus": {
+        "name": "qwen-plus",
+        "pretrained_model_name": os.getenv("QWEN_API_KEY",""),
+        "local_model_path": os.getenv("QWEN_API_KEY",""),
+        "api_key":os.getenv("QWEN_API_KEY",""),
+        "base_url":os.getenv("QWEN_BASE_URL",""),
+        "provides": "OpenAI_Qwen"
+    },
+    "qwen2.5-72b-instruct": {
+        "name": "qwen2.5-72b-instruct",
+        "pretrained_model_name": os.getenv("QWEN_API_KEY",""),
+        "local_model_path": os.getenv("QWEN_API_KEY",""),
+        "api_key":os.getenv("QWEN_API_KEY",""),
+        "base_url":os.getenv("QWEN_BASE_URL",""),
+        "provides": "OpenAI_Qwen"
+    },
     "chatglm-6b-int4": {
         "name": "chatglm-6b-int4",
         "pretrained_model_name": "THUDM/chatglm-6b-int4",
