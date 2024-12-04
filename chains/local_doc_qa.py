@@ -128,6 +128,7 @@ class LocalDocQA:
                     embedding_device:str=local_file_model_config.EMBEDDING_DEVICE,
                     top_k:int=local_file_model_config.VECTOR_SEARCH_TOP_K):
         self.llm=llm_model
+        print(f"向量化模式：{embedding_model}")
         self.embeddings=HuggingFaceEmbeddings(model_name=local_file_model_config.embedding_model_dict[embedding_model],
                                               model_kwargs={"device":embedding_device})
         self.top_k=top_k

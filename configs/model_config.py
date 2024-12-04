@@ -19,13 +19,13 @@ load_dotenv(dotenv_path)
 #文本向量模型
 embedding_model_dict = {
     "ernie-tiny": "nghuyong/ernie-3.0-nano-zh",
-    "ernie-base": "nghuyong/ernie-3.0-base-zh",
+    "text2vec-base-chinese-paraphrase": "D:/LargeModel_checkpoints/4_models/2_tet2vector/shibing624/text2vec-base-chinese-paraphrase",
     "text2vec-base": "D:/LargeModel_checkpoints/4_models/2_tet2vector/shibing624/text2vec-base-chinese",#"shibing624/text2vec-base-chinese",
     "text2vec": "GanymedeNil/text2vec-large-chinese",
 }
 
 # Embedding model name
-EMBEDDING_MODEL = "text2vec-base"
+EMBEDDING_MODEL = "text2vec-base-chinese-paraphrase"#"text2vec-base"
 
 # Embedding running device
 EMBEDDING_DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -35,7 +35,7 @@ EMBEDDING_DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 # 目前加入了chatglm-6b系列的模型，@TODO:加入Qwen系列的模型，加入glm-4-falsh api
 llm_model_dict = {
     "glm-4-flash": {
-        "name": "chatglm-4-flash",
+        "name": "glm-4-flash",
         "pretrained_model_name": os.getenv("GLM_4_FLASH_API_KEY",""),
         "local_model_path": os.getenv("GLM_4_FLASH_API_KEY",""),
         "api_key":os.getenv("GLM_4_FLASH_API_KEY",""),
@@ -88,7 +88,7 @@ llm_model_dict = {
 }
 
 # LLM 名称
-LLM_MODEL = "glm-4-flash"
+LLM_MODEL = "qwen-plus"#"glm-4-flash"
 #模型使用本地模型
 NO_REMOTE_MODEL = False
 # 本地模型存放的位置#TODO:修改模型位置

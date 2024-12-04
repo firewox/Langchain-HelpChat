@@ -14,7 +14,7 @@ from zhipuai import ZhipuAI
 class ChatGLM(BaseAnswer, LLM, ABC):
     max_token: int = 10000
     temperature: float = 0.01
-    top_p = 0.9
+    top_p:float = 0.9
     checkPoint: LoaderCheckPoint = None
     # history = []
     history_len: int = 10
@@ -86,13 +86,13 @@ from utils.logger import logger
 
 class ChatGLM_Flash(BaseAnswer,LLM,ABC):
     checkPoint: LoaderCheckPoint = None
-    temperature=0.95
-    max_tokens=2048
-    api_key=""
+    temperature:float=0.95
+    max_tokens:int=2048
+    api_key:str=""
     client_1: ZhipuAI=None
-    stream_1=False
+    stream_1:bool=False
     history_message: List[dict]=[]
-    history_len=10
+    history_len:int=10
     def __init__(self, checkPoint: LoaderCheckPoint = None):
         super().__init__()
         logger.info(f"checkPoint=={checkPoint}")

@@ -14,14 +14,14 @@ import json
 
 class OpenAI_Qwen(BaseAnswer,LLM,ABC):
     checkPoint: LoaderCheckPoint = None
-    temperature=0.95
-    max_tokens=2048
-    api_key=""
+    temperature:float=0.95
+    max_tokens:int=2048
+    api_key:str=""
     client_1: OpenAI=None
-    stream_1=False
+    stream_1:bool=False
     history_message: List[dict]=[]
-    history_len=10
-    base_url_1=""
+    history_len:int=10
+    base_url_1:str=""
     def __init__(self, checkPoint: LoaderCheckPoint = None):
         super().__init__()
         self.checkPoint = checkPoint
