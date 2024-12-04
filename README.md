@@ -5,7 +5,7 @@
 
 💡 受 [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) 项目启发，采建立了全流程可使用 LLM 模型实现的本地知识库问答应用。目前支持了chatGLM-6b、chatGLM-4-Flash-api、Qwen-Turbor 等开源大模型。
 
-🚩 本项目中 Embedding 默认选用的是 [GanymedeNil/text2vec-base-chinese](https://huggingface.co/GanymedeNil/text2vec-base-chinese/tree/main) ，LLM 默认选用的是 [ChatGLM-4-Flash](https://open.bigmodel.cn/console/trialcenter?modelCode=glm-4-flash) 。依托上述模型，本项目可实现使用**开源**模型**离线私有部署**。
+🚩 本项目中 Embedding 默认选用的是 [shibing624/text2vec-base-chinese-paraphrase](https://hf-mirror.com/shibing624/text2vec-base-chinese-paraphrase) ，LLM 默认选用的是 [ChatGLM-4-Flash](https://open.bigmodel.cn/console/trialcenter?modelCode=glm-4-flash) 。依托上述模型，本项目可实现使用**开源**模型**离线私有部署**。
 
 🖥️ 本项目主要有以下过程:
 - **读取文本** 
@@ -40,7 +40,17 @@
 
 - Embedding 模型硬件需求
   
-  本项目中选用的 Embedding 模型 [GanymedeNil/text2vec-base-chinese](https://huggingface.co/GanymedeNil/text2vec-base-chinese/tree/main) 可修改为在 CPU 中运行。
+  本项目中选用的 Embedding 模型 [shibing624/text2vec-base-chinese-paraphrase](https://hf-mirror.com/shibing624/text2vec-base-chinese-paraphrase)可修改为在 CPU 中运行。
+
+## 向量化模型
+
+中文匹配效果
+
+| Arch   | BaseModel                  | Model                                                        | ATEC  | BQ    | LCQMC | PAWSX | STS-B | SOHU-dd | SOHU-dc | Avg   | QPS  |
+| ------ | -------------------------- | ------------------------------------------------------------ | ----- | ----- | ----- | ----- | ----- | ------- | ------- | ----- | ---- |
+| CoSENT | hfl/chinese-macbert-base   | [shibing624/text2vec-base-chinese](https://hf-mirror.com/shibing624/text2vec-base-chinese) | 31.93 | 42.67 | 70.16 | 17.21 | 79.30 | 70.27   | 50.42   | 51.61 | 3008 |
+| CoSENT | hfl/chinese-lert-large     | [GanymedeNil/text2vec-large-chinese](https://hf-mirror.com/GanymedeNil/text2vec-large-chinese) | 32.61 | 44.59 | 69.30 | 14.51 | 79.44 | 73.01   | 59.04   | 53.12 | 2092 |
+| CoSENT | nghuyong/ernie-3.0-base-zh | [shibing624/text2vec-base-chinese-paraphrase](https://hf-mirror.com/shibing624/text2vec-base-chinese-paraphrase) | 44.89 | 63.58 | 74.24 | 40.90 | 78.93 | 76.70   | 63.30   | 63.08 | 3066 |
 
 
 ## 开发部署
@@ -63,7 +73,7 @@ $ python main.py
     - [ ] Agent 实现
     
 - [x] 增加更多 LLM 模型支持
-    
+  
     - [ ] 本地部署支持
     
         - [x] [THUDM/chatglm-6b](https://huggingface.co/THUDM/chatglm-6b)
@@ -80,8 +90,8 @@ $ python main.py
         - [x] [Qwen/Qwen2.5-72B-Instruct](https://www.modelscope.cn/models/Qwen/Qwen2.5-72B-Instruct)
     
 - [ ] 增加更多 Embedding 模型支持
-    - [ ] [shibing624/text2vec-base-chinese](https://huggingface.co/shibing624/text2vec-base-chinese)
-    - [x] [GanymedeNil/text2vec-base-chinese](https://huggingface.co/GanymedeNil/text2vec-base-chinese)
+    - [x] [shibing624/text2vec-base-chinese](https://huggingface.co/shibing624/text2vec-base-chinese)
+    - [x] [shibing624/text2vec-base-chinese-paraphrase](https://hf-mirror.com/shibing624/text2vec-base-chinese-paraphrase)
     - [x] [GanymedeNil/text2vec-large-chinese](https://huggingface.co/GanymedeNil/text2vec-large-chinese)
     
 - [x] 终端对话
