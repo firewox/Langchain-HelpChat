@@ -65,9 +65,9 @@ $ python main.py
 $ python webui-startup.py
 ```
 
-![对话界面](.\libs\pic1.JPG)
+![对话界面](./libs/pic1.JPG)
 
-![知识库对话界面](.\libs\pic2.JPG)
+![知识库对话界面](./libs/pic2.JPG)
 
 ## 路线图
 

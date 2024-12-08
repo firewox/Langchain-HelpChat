@@ -1,6 +1,6 @@
 #日志
 logs/*
-/backend/content/*
-/backend/vector_store/*
-/backend/nltk_data/*
+backend/content/*
+backend/vector_store/*
+backend/nltk_data/*
 .idea/*
