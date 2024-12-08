@@ -1,8 +1,7 @@
-import configs.model_config as local_file_model_config
-from models.loader.args import parser
-from utils.logger import logger
-import models.loader.loader as loader
-from chains.local_doc_qa import LocalDocQA
+import backend.configs.model_config as local_file_model_config
+from backend.models.loader.args import parser
+from backend import models as loader
+from backend.chains.local_doc_qa import LocalDocQA
 import os
 
 def main():
@@ -10,7 +9,7 @@ def main():
     args_dict = vars(args)
     loader.loaderCheckPoint = loader.LoaderCheckPoint(args_dict)
     # 初始化LLM模型：qwen-turbo、glm-4-flash、qwen2-0.5b-instruct、qwen-plus
-    llm_model_ins = loader.loaderCheckPoint.loaderLLM(llm_model="qwen-plus",no_remote_model=False)
+    llm_model_ins = loader.loaderCheckPoint.loaderLLM(llm_model="qwen-plus", no_remote_model=False)
     llm_model_ins.history_len = local_file_model_config.LLM_HISTORY_LEN
 
     # 初始化向量模型

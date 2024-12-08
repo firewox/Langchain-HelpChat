@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 import sys
 project_path = Path.cwd()
+print(f"project_path=={project_path}")
 log_path = Path(project_path, "logs")
 # Ensure the log directory exists
 log_path.mkdir(parents=True, exist_ok=True)

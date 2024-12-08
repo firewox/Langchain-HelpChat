@@ -4,7 +4,7 @@
 from langchain.document_loaders.unstructured import UnstructuredFileLoader
 import nltk
 from typing import List
-import configs.model_config as local_file_model_config
+import backend.configs.model_config as local_file_model_config
 from paddleocr import PaddleOCR
 import os
 import fitz

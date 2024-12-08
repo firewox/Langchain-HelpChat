@@ -3,7 +3,7 @@
 # @Email : lyutian2020@qq.com
 
 from langchain.text_splitter import CharacterTextSplitter
-from configs.model_config import SENTENCE_SIZE
+from backend.configs.model_config import SENTENCE_SIZE
 from typing import List
 import re
 

@@ -59,7 +59,15 @@
 ```shell
 $ python main.py
 ```
+### 2. 使用 web-ui 交互
+执行 [webui-startup.py](webui-startup.py) 脚本体验**命令行交互**：
+```shell
+$ python webui-startup.py
+```
 
+![对话界面](.\libs\pic1.JPG)
+
+![知识库对话界面](.\libs\pic2.JPG)
 
 ## 路线图
 
@@ -98,12 +106,12 @@ $ python main.py
     - [x] 非流式对话
     - [ ] 流式对话
     
-- [ ] Web UI
+- [x] Web UI
     - [ ] 基于 gradio 实现 Web UI DEMO
-    - [ ] 基于 streamlit 实现 Web UI DEMO
+    - [x] 基于 streamlit 实现 Web UI DEMO
     - [ ] 引用标注
     - [ ] 增加知识库管理
-        - [ ] 选择知识库开始问答
+        - [x] 选择知识库开始问答
         - [ ] 上传文件/文件夹至知识库
         - [ ] 知识库测试
         - [ ] 删除知识库中文件

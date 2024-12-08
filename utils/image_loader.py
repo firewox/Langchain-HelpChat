@@ -5,7 +5,7 @@ from langchain.document_loaders import UnstructuredFileLoader
 from paddleocr import PaddleOCR
 import os
 import nltk
-from configs.model_config import NLTK_DATA_PATH
+from backend.configs.model_config import NLTK_DATA_PATH
 from typing import List
 from nltk.tokenize import sent_tokenize, word_tokenize
 
