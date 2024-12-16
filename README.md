@@ -1,9 +1,9 @@
 # HelpChat，基于本地知识库的 LLM 实现
 ## 介绍
 
-🤖️ 利用 [langchain](https://github.com/hwchase17/langchain) 思想实现，基于本地知识库建立一套对中文场景与开源模型支持友好、可离线运行的知识库问答解决方案。
+🤖️ 利用 [langchain](https://github.com/hwchase17/langchain) 思想实现，基于本地知识库建立一套对中文场景与开源模型支持友好、在线运行的知识库问答解决方案。
 
-💡 受 [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) 项目启发，采建立了全流程可使用 LLM 模型实现的本地知识库问答应用。目前支持了chatGLM-6b、chatGLM-4-Flash-api、Qwen-Turbor 等开源大模型。
+💡 受 [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) 项目启发，采建立了全流程可使用 LLM 模型实现的本地知识库问答应用。目前支持了智谱-api、通义千问-api 等开源大模型。
 
 🚩 本项目中 Embedding 默认选用的是 [shibing624/text2vec-base-chinese-paraphrase](https://hf-mirror.com/shibing624/text2vec-base-chinese-paraphrase) ，LLM 默认选用的是 [ChatGLM-4-Flash](https://open.bigmodel.cn/console/trialcenter?modelCode=glm-4-flash) 。依托上述模型，本项目可实现使用**开源**模型**离线私有部署**。
 
@@ -30,14 +30,6 @@
 
 ## 硬件需求
 
-- ChatGLM-6B 模型硬件需求
-
-    | **量化等级**   | **最低 GPU 显存**（推理） | **最低 GPU 显存**（高效参数微调） |
-    | -------------- | ------------------------- | --------------------------------- |
-    | FP16（无量化） | 13 GB                     | 14 GB                             |
-    | INT8           | 8 GB                     | 9 GB                             |
-    | INT4           | 6 GB                      | 7 GB                              |
-
 - Embedding 模型硬件需求
   
   本项目中选用的 Embedding 模型 [shibing624/text2vec-base-chinese-paraphrase](https://hf-mirror.com/shibing624/text2vec-base-chinese-paraphrase)可修改为在 CPU 中运行。
@@ -54,20 +46,25 @@
 
 
 ## 开发部署
-### 1. 使用命令行交互
-执行 [main.py](main.py) 脚本体验**命令行交互**：
+### 1. web-ui 端启动
+执行 [webui-startup.py](frontend/webui-startup.py) 脚本体验**命令行交互**：
 ```shell
-$ python main.py
-```
-### 2. 使用 web-ui 交互
-执行 [webui-startup.py](webui-startup.py) 脚本体验**命令行交互**：
-```shell
-$ python webui-startup.py
+$ python /frontend/webui-startup.py
 ```
 
 ![对话界面](./libs/pic1.JPG)
 
 ![知识库对话界面](./libs/pic2.JPG)
+
+### 2. 后端（知识向量库-数据库）启动
+
+执行 [main_controller.py](backend/main_controller.py) 脚本体验**命令行交互**：
+
+```bash
+$ python /backend/main_controller.py
+```
+
+
 
 ## 路线图
 
@@ -84,7 +81,7 @@ $ python webui-startup.py
   
     - [ ] 本地部署支持
     
-        - [x] [THUDM/chatglm-6b](https://huggingface.co/THUDM/chatglm-6b)
+        - [ ] [THUDM/chatglm-6b](https://huggingface.co/THUDM/chatglm-6b)
     
         - [ ] [THUDM/chatglm-6b-int4](https://huggingface.co/THUDM/chatglm-6b-int4)
         - [ ] [THUDM/chatglm-6b-int4-qe](https://huggingface.co/THUDM/chatglm-6b-int4-qe)
@@ -97,14 +94,14 @@ $ python webui-startup.py
         - [x] [Qwen/Qwen-2-0.5b-instruct](https://bailian.console.aliyun.com/?productCode=p_efm#/model-market/detail/qwen2-0.5b-instruct)
         - [x] [Qwen/Qwen2.5-72B-Instruct](https://www.modelscope.cn/models/Qwen/Qwen2.5-72B-Instruct)
     
-- [ ] 增加更多 Embedding 模型支持
+- [x] 增加更多 Embedding 模型支持
     - [x] [shibing624/text2vec-base-chinese](https://huggingface.co/shibing624/text2vec-base-chinese)
     - [x] [shibing624/text2vec-base-chinese-paraphrase](https://hf-mirror.com/shibing624/text2vec-base-chinese-paraphrase)
     - [x] [GanymedeNil/text2vec-large-chinese](https://huggingface.co/GanymedeNil/text2vec-large-chinese)
     
 - [x] 终端对话
-    - [x] 非流式对话
-    - [ ] 流式对话
+    - [ ] 非流式对话
+    - [x] 流式对话
     
 - [x] Web UI
     - [ ] 基于 gradio 实现 Web UI DEMO
@@ -117,7 +114,7 @@ $ python webui-startup.py
         - [ ] 删除知识库中文件
     - [ ] 支持搜索引擎问答
     
-- [ ] 增加 API 支持
-    - [ ] 利用 fastapi 实现 API 部署方式
-    - [ ] 实现调用 API 的 Web UI Demo
+- [x] 增加 API 支持
+    - [x] 利用 fastapi 实现 API 部署方式
+    - [x] 实现调用 API 的 Web UI Demo
 

@@ -1,2 +1,0 @@
-from .dialogue import dialogue_page,dialogue_page_v1
-from .dialogue_knowledge import dialogue_knowledge_page
