@@ -12,6 +12,11 @@ class history_services:
         messages = history_dao.chatGetHistoryByUseridAndHistoryName(user_id=user_id,user_name=user_name,history_name=history_name)
         return messages
 
+    # 根据user id 创建新的聊天会话名称
+    def chatCreateNewDialogueByUserId(user_id:str,messages:list):
+        history_name = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+"会话"
+        history_dao.chatCreateNewDialogueByUserId(user_id=user_id,history_name=history_name,messages=messages)
+        return history_name
 
     # 查询所有历史记录的名字列表
     def chatGetHistoryNameList(user_id:str):

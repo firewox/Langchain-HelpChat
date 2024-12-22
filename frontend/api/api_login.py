@@ -19,7 +19,8 @@ class api_login:
         logger.info(f"\nself.backend_url={self.backend_url}")
         if response.status_code==200:
             resu = response.json()
-            logger.info(f"resu={resu}")
+            if resu.get("msg") is None:
+                return None
             self.user_id=resu.get("msg").get("user_id")
             self.user_name=resu.get("msg").get("user_name")
             return {"user_id":self.user_id,"user_name":self.user_name}

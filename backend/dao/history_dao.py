@@ -97,3 +97,29 @@ class history_dao:
                 session.rollback()  # 如果出现异常，回滚会话
                 logger.info(f"\nError saving history: {e}")
                 return 0
+
+    # 根据 user_id history_name保存新的聊天会话名称
+    def chatCreateNewDialogueByUserId(user_id:str,history_name:str,messages:list):
+        with get_db_session() as session:
+            # 创建新的 History 实例
+            new_history = History(
+                user_id=user_id,
+                history_name=history_name,
+                history_content=messages,
+                created_time=datetime.datetime.now(),
+                updated_time=datetime.datetime.now(),
+                is_del=0,
+            )
+
+            # 添加实例到会话
+            session.add(new_history)
+
+            # 提交会话以保存到数据库
+            try:
+                session.commit()
+                logger.info(f"\nHistory saved with ID: {new_history.hid}")
+                return 1
+            except Exception as e:
+                session.rollback()  # 如果出现异常，回滚会话
+                logger.info(f"\nError saving history: {e}")
+                return 0

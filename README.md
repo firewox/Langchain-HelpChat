@@ -3,7 +3,7 @@
 
 🤖️ 利用 [langchain](https://github.com/hwchase17/langchain) 思想实现，基于本地知识库建立一套对中文场景与开源模型支持友好、在线运行的知识库问答解决方案。
 
-💡 受 [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) 项目启发，采建立了全流程可使用 LLM 模型实现的本地知识库问答应用。目前支持了智谱-api、通义千问-api 等开源大模型。
+💡 受 [Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat) 、[knowledge_gpt](https://github.com/mmz-001/knowledge_gpt)项目启发，采建立了全流程可使用 LLM 模型实现的本地知识库问答应用。目前支持了智谱-api、通义千问-api 等开源大模型。
 
 🚩 本项目中 Embedding 默认选用的是 [shibing624/text2vec-base-chinese-paraphrase](https://hf-mirror.com/shibing624/text2vec-base-chinese-paraphrase) ，LLM 默认选用的是 [ChatGLM-4-Flash](https://open.bigmodel.cn/console/trialcenter?modelCode=glm-4-flash) 。依托上述模型，本项目可实现使用**开源**模型**离线私有部署**。
 
@@ -53,6 +53,8 @@ $ python /frontend/webui-startup.py
 ```
 
 ![对话界面](./libs/pic1.JPG)
+
+![知识库gpt界面](./libs/pic3.JPG)
 
 ![知识库对话界面](./libs/pic2.JPG)
 

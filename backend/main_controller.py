@@ -78,6 +78,12 @@ def set_history_chat(params:historySet):
     history_name_list = history_services.chatSetHistoryByUseridAndHistoryName(user_id=user_id,history_name=history_name,messages=messages)
     return {"msg":history_name_list}
 
+@app.get("/create_new_dialogue")
+def create_new_dialogue(user_id:str=Query(...,description="user id"),
+                        messages:list=Query(...,description="system prompt系统内置的记录")):
+    history_name = history_services.chatCreateNewDialogueByUserId(user_id=user_id,messages=messages)
+    return {'msg':history_name}
+
 
 # POST 处理前端发送来的查询所有已经向量化后的知识库列表
 @app.get("/get_knowledge_name_list")

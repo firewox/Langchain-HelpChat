@@ -6,6 +6,7 @@ import frontend.configs.frontend_config as frontend_config
 import os
 import sys
 
+
 host = frontend_config.WEBUI_SERVER["host"]
 port = frontend_config.WEBUI_SERVER["port"]
 current_directory = os.path.join(os.path.dirname(__file__), "")

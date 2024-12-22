@@ -22,11 +22,12 @@ class api_chat:
         self._messages = []
         self._backend_url = str(config.BACKEND_SERVER.get("host","127.0.0.1"))+":"+str(config.BACKEND_SERVER.get("port","8601"))
         self._requests = requests
+        self._system_prompt = [{"role":"user","content":"你是谁"},{"role":"assistant","content":"我是小助帮手"}]
 
 
     # POST请求：请求获取历史聊天记录
     def get_history_chat(self,user_id:str,user_name:str,history_name:str="default"):
-        messages = [{"role":"user","content":"你是谁"},{"role":"assistant","content":"我是小助帮手"}]
+        messages = self.system_prompt
         data = {"user_id":user_id,"user_name":user_name,"history_name":history_name}
         #logger.info(f"\n请求获取历史聊天记录，参数data={data}")
         response = self.requests.post(self.backend_url+"/get_history_chat",json=data)
@@ -34,9 +35,8 @@ class api_chat:
         if response.status_code == 200:
             result = response.json()
             logger.info(f"\n请求获取历史聊天记录result={result}")
-            if result.get("msg") is not None:
+            if result.get("msg") is not None and result.get("msg")!="":
                 messages = result.get('msg')
-
         self.messages = messages
         return messages
 
@@ -56,7 +56,7 @@ class api_chat:
         else:
             return "failure"
 
-    # POST请求：返回该用户的历史聊天记录名称的列表
+    # POST 请求：返回该用户的历史聊天记录名称的列表
     def get_history_name_list(self,user_id:str):
         # 向后端发送请求
         #history_name_list = api_server.get_history_name_list(user_name=self.user_name)
@@ -79,6 +79,21 @@ class api_chat:
             self.history_name = self.history_name_list[0]
             return self.history_name_list
 
+    # GET 请求：新建大模型会话，返回创建的新的聊天会话名称，返回新的历史聊天记录名称
+    def create_new_dialogue(self,user_id:str):
+        data={"user_id":user_id,"messages":self.system_prompt}
+        response = self.requests.get(self.backend_url+"/create_new_dialogue",params=data)
+        if response.status_code==200:
+            resu=response.json()
+            if resu['msg'] is not None:
+                history_name = resu["msg"]
+                return history_name
+            else:
+                logger.error(f"\n新建聊天会话失败,请求失败")
+                return "default"
+        else:
+            logger.error(f"\n新建聊天会话失败")
+            return "default"
 
     # 本地处理：返回可用的llm接口
     def get_model_list(self):
@@ -218,3 +233,11 @@ class api_chat:
     @requests.setter
     def requests(self,requests):
         self._requests = requests
+
+    @property
+    def system_prompt(self):
+        return self._system_prompt
+    @system_prompt.setter
+    def system_prompt(self,system_prompt):
+        self._system_prompt = system_prompt
+

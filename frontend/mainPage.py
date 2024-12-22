@@ -2,8 +2,10 @@
 # @Author: yutian.li
 # @Email : lyutian2020@qq.com
 import streamlit as st
-import pages.dialogue as dialogue
-import pages.dialogue_knowledge as dialogue_knowledge
+from pages.dialogue import dialogue
+from pages.dialogue_knowledge import dialogue_knowledge
+from pages.dialogue_knowledge_v2 import dialogue_knowledge_v2
+from pages.login import login
 from streamlit_option_menu import option_menu
 import os
 from frontend.api.api_login import api_login
@@ -16,11 +18,15 @@ def mainPage():
     pages = {
         "大模型对话": {
             "icon": os.path.join("imgs", "chat_assistant_icon.png"),
-            "func": dialogue.dialogue_page,
+            "func": dialogue().dialogue_page,
         },
         "知识库助手": {
             "icon": os.path.join("imgs", "chat_assistant_icon2.png"),
-            "func": dialogue_knowledge.dialogue_knowledge_page,
+            "func": dialogue_knowledge().dialogue_knowledge_page,
+        },
+        "知识库GPT": {
+            "icon": os.path.join("imgs", "chat_assistant_icon2.png"),
+            "func": dialogue_knowledge_v2().dialogue_knowledge_v2_page,
         }
     }
 
@@ -42,27 +48,8 @@ def mainPage():
         pages[selected_page]["func"]()
 
 
-# 登录界面
-def login_page():
-    st.title("登录")
 
-    # 输入框
-    user_name = st.text_input("用户名", "")
-    password = st.text_input("密码", "", type="password")
-    # 登录按钮
-    if st.button("登录"):
-        if user_name!="" and password!="":
-            resu = api_login_instance.login(user_name=user_name, password=password)
-            if resu:
-                st.success("登录成功！")
-                st.session_state.user_id = resu.get("user_id")
-                st.session_state.user_name = resu.get("user_name")
-                # 刷新页面，使主页面显示
-                st.rerun()  # 刷新页面
-            else:
-                st.warning("用户名或密码错误！")
-
-def main():
+if __name__ == "__main__":
     st.set_page_config(
         "Langchain-HelpChat WebUI",
         os.path.join("imgs", "icon_v1.png"),
@@ -73,12 +60,8 @@ def main():
             'About': f"""欢迎使用 Langchain-HelpChat WebUI {VERSION}！"""
         }
     )
-
-    # 检查用户登录状态
+    #检查用户登录状态
     if "user_id" not in st.session_state or "user_name" not in st.session_state:
-        login_page()  # 显示登录界面
+        login().login_pae()  # 显示登录界面
     else:
         mainPage()  # 显示主界面
-
-if __name__ == "__main__":
-    main()
