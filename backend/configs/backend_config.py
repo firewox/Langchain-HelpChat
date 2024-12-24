@@ -49,7 +49,7 @@ UPLOAD_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "con
 # 缓存知识库数量
 CACHED_VS_NUM = 1
 # 文本分句长度
-SENTENCE_SIZE = 100
+SENTENCE_SIZE = 250
 # 匹配后单段上下文长度
 CHUNK_SIZE = 100
 # return top-k text chunk from vector store

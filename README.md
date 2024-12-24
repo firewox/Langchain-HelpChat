@@ -104,16 +104,15 @@ $ python /backend/main_controller.py
 - [x] 终端对话
     - [ ] 非流式对话
     - [x] 流式对话
-    
+- [ ] Docker容器部署
 - [x] Web UI
     - [ ] 基于 gradio 实现 Web UI DEMO
     - [x] 基于 streamlit 实现 Web UI DEMO
     - [ ] 引用标注
     - [ ] 增加知识库管理
         - [x] 选择知识库开始问答
-        - [ ] 上传文件/文件夹至知识库
-        - [ ] 知识库测试
-        - [ ] 删除知识库中文件
+        - [x] 上传文件/文件夹至知识库
+        - [x] 知识库测试
     - [ ] 支持搜索引擎问答
     
 - [x] 增加 API 支持

@@ -36,9 +36,6 @@ class Knowledge(SQLModel, table=True):
     knowledge_vector_name: str = Field(default=None, max_length=64, sa_column_kwargs={"nullable": False})
     knowledge_vector_path: str = Field(default=None, max_length=256, sa_column_kwargs={"nullable": False})
 
-    # 外键引用 FileToDir 表的 file_dir_id
-    file_dir_id: int = Field(default=None, sa_column_kwargs={"nullable": False}, foreign_key="file_dir.file_dir_id")
-
     embedding_model_name: str = Field(default=None, max_length=64, sa_column_kwargs={"nullable": False})
     created_time: datetime = Field(default_factory=datetime.utcnow, sa_column_kwargs={"nullable": False})
     updated_time: datetime = Field(default_factory=datetime.utcnow, sa_column_kwargs={"nullable": False})

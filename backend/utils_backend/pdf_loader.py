@@ -4,7 +4,7 @@
 from langchain.document_loaders.unstructured import UnstructuredFileLoader
 import nltk
 from typing import List
-import backend.configs.model_config as local_file_model_config
+import backend.configs.backend_config as local_file_model_config
 from paddleocr import PaddleOCR
 import os
 import fitz
@@ -44,7 +44,7 @@ class UnstructuredPaddlePDFLoader(UnstructuredFileLoader):
 
         txt_file_path = pdf_ocr_txt(self.file_path)
         # 下载NLTK库中的punkt模型，这个模型用于句子和单词的分割。
-        nltk.download('punkt')
+        #nltk.download('punkt')
         with open(txt_file_path,"r",encoding="utf-8") as file:
             con = file.read()
         sentences = nltk.tokenize.sent_tokenize(con)

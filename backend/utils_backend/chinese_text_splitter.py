@@ -3,7 +3,7 @@
 # @Email : lyutian2020@qq.com
 
 from langchain.text_splitter import CharacterTextSplitter
-from backend.configs.model_config import SENTENCE_SIZE
+from backend.configs.backend_config import SENTENCE_SIZE
 from typing import List
 import re
 
@@ -28,7 +28,7 @@ class ChineseTextSplitter(CharacterTextSplitter):
         return sent_list
 
 
-    def split_text(self, text: str) -> List[str]:   ##此处需要进一步优化逻辑
+    def split_text(self, text: str) -> List[str]:   ##TODO 此处需要进一步优化逻辑
         if self.pdf:
             text = re.sub(r"\n{3,}", r"\n", text)
             text = re.sub('\s', " ", text)

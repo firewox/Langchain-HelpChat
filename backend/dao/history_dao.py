@@ -3,7 +3,7 @@
 # @Email : lyutian2020@qq.com
 import datetime
 
-from backend.utils.database import get_db_session
+from backend.utils_backend.database import get_db_session
 from backend.beans.model_beans import History
 from sqlmodel import select
 from utils.logger import logger

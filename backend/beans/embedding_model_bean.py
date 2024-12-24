@@ -15,7 +15,9 @@ class embedding_model_bean:
         self._top_k = 50
         self._vector_store:FAISS=None
 
-
+    @staticmethod
+    def _embeddings_hash(self):
+        return hash(self.model_name)
 
     @property
     def embeddings(self):
@@ -23,6 +25,7 @@ class embedding_model_bean:
     @embeddings.setter
     def embeddings(self,embeddings:HuggingFaceEmbeddings):
         self._embeddings=embeddings
+
 
     @property
     def top_k(self):

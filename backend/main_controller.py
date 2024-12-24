@@ -2,15 +2,17 @@
 # @Author: yutian.li
 # @Email : lyutian2020@qq.com
 import os.path
-from fastapi import FastAPI,Query
+from fastapi import FastAPI,Query,File, UploadFile,Form
 from pydantic import BaseModel
 from backend.servers.login.login_services import login_services
 from backend.servers.history.history_services import history_services # services的处理工具
 from backend.servers.knowledge.knowledge_services import knowledge_services # services的处理工具
-from backend.configs.backend_config import VECTOR_SEARCH_TOP_K,EMBEDDING_DEVICE,PROMPT_TEMPLATE,BACKEND_SERVER
+from backend.configs.backend_config import VECTOR_SEARCH_TOP_K,EMBEDDING_DEVICE,PROMPT_TEMPLATE,BACKEND_SERVER,UPLOAD_ROOT_PATH
 from dotenv import load_dotenv
 import uvicorn
+from fastapi.responses import JSONResponse
 from utils.logger import logger
+import uuid
 
 # 加载环境变量
 dotenv_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -84,6 +86,39 @@ def create_new_dialogue(user_id:str=Query(...,description="user id"),
     history_name = history_services.chatCreateNewDialogueByUserId(user_id=user_id,messages=messages)
     return {'msg':history_name}
 
+@app.post("/upload_file")
+async def upload_file(
+        file: UploadFile = File(...),
+        dir_name: str = Form("default"),
+        user_id: str = Form(...)
+):
+    try:
+        # 构建保存目录，可以包含用户ID
+        upload_dir = os.path.join(UPLOAD_ROOT_PATH, user_id, dir_name)
+        os.makedirs(upload_dir, exist_ok=True)
+        # 构建文件的完整路径
+        file_path = os.path.join(upload_dir, file.filename)
+        logger.info(f"\n上传文件file_path={file_path}")
+        # 以二进制写模式打开文件，并写入内容
+        with open(file_path, "wb") as buffer:
+            contents = await file.read()  # 读取上传文件的内容
+            buffer.write(contents)  # 写入到新文件
+        # 保存文件
+        knowledge_services.knowledgeInsertFile(user_id=user_id,dir_name=dir_name,file_name=file.filename)
+        return JSONResponse(status_code=200,content={
+            "msg": 1,
+        })
+    except Exception as e:
+        return JSONResponse(status_code=400, content={"msg": None})
+
+@app.post("/create_knowledge")
+def create_knowledge(dir_name: str = Form("default"),
+                     user_id: str = Form(...)):
+    fl = knowledge_services.create_knowledge(dir_name=dir_name,user_id=user_id)
+    if fl==1:
+        return JSONResponse(status_code=200, content={"msg": 1})
+    else:
+        return JSONResponse(status_code=200, content={"msg": None})
 
 # POST 处理前端发送来的查询所有已经向量化后的知识库列表
 @app.get("/get_knowledge_name_list")

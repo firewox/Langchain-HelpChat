@@ -5,6 +5,8 @@ from typing import Dict,List
 import frontend.configs.frontend_config as config
 import requests
 from utils.logger import logger
+from io import BytesIO
+import requests
 
 
 # 处理关于 chat 的逻辑请求，分发请求
@@ -43,7 +45,32 @@ class api_knowledge:
                 self.knowledge_name = self.knowledge_name_list[0]
         return self.knowledge_name_list
 
+    # POST 创建知识向量库
+    def create_knowledge(self,user_id:str,dir_name:str):
+        data={"user_id":user_id,"dir_name":dir_name}
+        # 发送POST请求到FastAPI端点
+        response = self.requests.post(self.backend_url+"/create_knowledge", data=data)
+        if response.status_code==200:
+            resu = response.json()
+            if resu['msg']!=None:
+                return 1
+        return 0
 
+    # POST 请求：上传文件
+    def upload_file(self,user_id:str,dir_name:str,file):
+        fle = file[0]
+        # 准备文件数据
+        files = {"file": (fle.name, fle.getvalue(), fle.type)}
+        data={"dir_name":dir_name,"user_id":user_id}
+        # 发送POST请求到FastAPI端点
+        response = self.requests.post(self.backend_url+"/upload_file", files=files, data=data)
+        if response.status_code==200:
+            resu = response.json()
+            if resu['msg']!=None:
+                f2 = self.create_knowledge(user_id=user_id,dir_name=dir_name)
+                return 1==f2
+        logger.info(f"\nresponse.status_code={response.status_code}")
+        return 0
 
 
     @property # java里的getting方法，访问成员变量
